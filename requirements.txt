@@ -1,0 +1,7 @@
+langgraph
+langchain
+sqlalchemy
+psycopg2-binary
+pymysql
+streamlit
+ragas
