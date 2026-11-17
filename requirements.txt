@@ -1,7 +1,2 @@
-langgraph
-langchain
-sqlalchemy
-psycopg2-binary
-pymysql
-streamlit
-ragas
+pytest
+# optional: langgraph, langchain, sqlalchemy, streamlit, ragas

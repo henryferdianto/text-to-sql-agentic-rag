@@ -1,4 +1,4 @@
-"""Hybrid (dense + lexical) document retrieval."""
+"""Hybrid (dense + lexical) document retrieval — lexical demo fallback."""
 from dataclasses import dataclass
 
 
@@ -10,7 +10,6 @@ class Document:
 
 
 def hybrid_search(query: str, docs: list[Document], top_k: int = 5) -> list[Document]:
-    # Replace with embeddings + BM25; keyword overlap used here as a stub.
     terms = set(query.lower().split())
     for doc in docs:
         overlap = len(terms & set(doc.text.lower().split()))

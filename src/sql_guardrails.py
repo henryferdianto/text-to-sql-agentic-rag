@@ -2,7 +2,8 @@
 import re
 
 FORBIDDEN = re.compile(
-    r"\b(insert|update|delete|drop|alter|truncate|create|grant|revoke)\b", re.I
+    r"\b(insert|update|delete|drop|alter|truncate|create|grant|revoke|attach|pragma)\b",
+    re.I,
 )
 
 
@@ -11,8 +12,9 @@ class UnsafeQueryError(ValueError):
 
 
 def ensure_read_only(sql: str) -> str:
-    if not sql.strip().lower().startswith(("select", "with")):
+    cleaned = sql.strip().rstrip(";")
+    if not cleaned.lower().startswith(("select", "with")):
         raise UnsafeQueryError("only SELECT/CTE queries are allowed")
-    if FORBIDDEN.search(sql):
+    if FORBIDDEN.search(cleaned):
         raise UnsafeQueryError("write operations are not permitted")
-    return sql
+    return cleaned
